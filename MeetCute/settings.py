@@ -79,6 +79,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'MeetCute.wsgi.application'
 ASGI_APPLICATION = "MeetCute.asgi.application"
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
