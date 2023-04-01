@@ -12,6 +12,12 @@ def num_similarities_binary(user_answers, matches):
     if user_answers.minmax == matches.minmax:
         counter +=1
 
+def num_similarities_multi(user_answers, matches):
+    #movie
+    user_answers.movie
+    #books
+    #music
+
 
 def matching_algorithm(request):
     user_answers = Questions.objects.get(user=request.user)
@@ -23,8 +29,14 @@ def matching_algorithm(request):
                                               relationshiptype = user_answers.relationshiptype, edu = user_answers.partner_edu,
                                               profession = user_answers.partner_profession
                                               )
+    final_matches = []
     for matches in filter_matches:
         number_of_similarities_binary_fields = num_similarities_binary(user_answers, matches)
-        if number_of_similarities_binary_fields >= Global_stats.
+        if number_of_similarities_binary_fields >= Global_stats.binary_question_similarity_mean:
+            print("Consider them")
+            final_matches.append(matches)
+        number_of_similarities_binary_fields = num_similarities_multi(user_answers.movie, matches.movie)
+
+
 
 
