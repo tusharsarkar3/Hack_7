@@ -5,23 +5,24 @@
             <div class="d-flex align-items-center justify-content-evenly">
                 <div id="logo" class="col-md-4">
                     <a href="{% url 'index'%}">
-                        <div class="my-0 py-0"><img src="{% static 'social/img/instagram.png'%}" alt="" class="img-fluid"></div>
+                        <div class="my-0 py-0"><img src="{% static 'social/img/meetcute.png'%}" alt="" class="img-fluid" style="height: 3rem;"></div>
                     </a>
                 </div>
-                <div id="searchDiv" class="col-md-4 d-none d-md-flex">
+                <!-- <div id="searchDiv" class="col-md-4 d-none d-md-flex">
                     <form>
                         <input type="text" placeholder="&#xF002; Search"
                             id="search" />
                     </form>
-                </div>
+                </div> -->
                 <div id="nav" class="col-md-4 flex-grow-1 align-items-center">
                     <ul class="d-flex align-items-centre justify-content-between">
-                        <li><a href="#"><i class='bx bxs-home'></i></a></li>
+                        <li><a href="{% url 'index' %}"><i class='bx bxs-home'></i></a></li>
                         <li><a href="#"><i class='bx bxl-messenger'></i></a></li>
                         <li data-bs-toggle="modal" data-bs-target="#uploadModal"><a href="#"><i
                                     class='bx bx-message-square-add'></i></a></li>
-                        <li><a href="#"><i class='bx bx-heart'></i></a></li>
                         <li><a href="#"><i class='bx bx-user-circle'></i></a></li>
+                        <li><a href="{% url 'show_matches' %}" style="font-size: 20px; ;">swipe</a></li>
+
                     </ul>
                 </div>
             </div>

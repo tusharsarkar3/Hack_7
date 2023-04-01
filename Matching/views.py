@@ -29,6 +29,6 @@ def questions(request):
 
 @login_required
 def show_matches(request):
-    matches=User.objects.all()
-    # matches = Matches.objects.get(user=request.user)
+    # matches=User.objects.all()
+    matches = Matches.objects.get(user=request.user)
     return render(request, 'Matching/show_matches.html',context={'matches':matches})
