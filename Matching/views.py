@@ -9,10 +9,44 @@ from django.contrib.auth.decorators import login_required
 
 def questions(request):
     if request.method=="POST":  
-            age = request.POST.get('age')
-            gender = request.POST.get('gender')
-            print(request.user)
-            questions = Questions.objects.create(user=request.user,age=age,gender=gender)
+            dob = request.POST.get('dobu')
+            tob = request.POST.get('timeu')
+            pob = request.POST.get('placeu')
+            state = request.POST.get('stateu')
+            city = request.POST.get('cityu')
+            age = request.POST.get('ageu')
+            partner_age_low = int(request.POST.get('agep').strip(" ").split("-")[0])
+            partner_age_high = int(request.POST.get('agep').strip(" ").split("-")[1])
+            gender = request.POST.get('genderu')
+            partner_gender = request.POST.get('genderp')
+            religion = request.POST.get('religionu')
+            partner_religion = request.POST.get('religionp')
+            mothertongue = request.POST.get('mothertongueu')
+            partner_mothertongue = request.POST.get('mothertonguep')
+            relationshiptype = request.POST.get('relationshiptypeu')
+            edu = request.POST.get('eduu')
+            partner_edu = request.POST.get('edup')
+            profession = request.POST.get('profu')
+            partner_profession = request.POST.get('profp')
+            datechar = request.POST.get('pref1')
+            animal = request.POST.get('pref2')
+            daynight = request.POST.get('pref3')
+            movie = request.POST.get('pref4')
+            music = request.POST.get('pref5')
+            minmax = request.POST.get('pref6')
+            MBTI = request.POST.get('mbtiEI') + request.POST.get('mbtiSN') + request.POST.get('mbtiTF') + request.POST.get('mbtiJP')
+            interests = request.POST.get('inthobu')
+            print(MBTI)
+            questions = Questions.objects.create(user=request.user,dob =dob,tob=tob,pob=pob,state=state,
+                                                 city=city,age=age,partner_age_low=partner_age_low,
+                                                 partner_age_high=partner_age_high,gender=gender,
+                                                 partner_gender=partner_gender,religion=religion,
+                                                 partner_religion=partner_religion,mothertongue=mothertongue,
+                                                partner_mothertongue=partner_mothertongue,relationshiptype=relationshiptype,
+                                                edu=edu,partner_edu=partner_edu,profession=profession,
+                                                partner_profession=partner_profession,
+                                                datechar=datechar,animal=animal,daynight=daynight,movie=movie,
+                                                music=music,minmax=minmax,MBTI=MBTI,interests=interests)
             print(questions)
             return redirect('show_matches')
     '''form = QuestionsForm
