@@ -29,7 +29,6 @@ class Questions(models.Model):
     movie=models.CharField(max_length=20)
     music=models.CharField(max_length=20)
     minmax=models.CharField(max_length=20)
-
     MBTI=models.CharField(max_length=20)
     interests=models.CharField(max_length=200)
 
