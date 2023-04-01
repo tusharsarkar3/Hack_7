@@ -48,20 +48,20 @@ def matching_algorithm(request):
             print("Consider them")
             final_matches.append(matches)
 
-        freq = {}
-        for item in matches:
-            if (item in freq):
-                freq[item] += 1
-            else:
-                freq[item] = 1
+    freq = {}
+    for item in matches:
+        if (item in freq):
+            freq[item] += 1
+        else:
+            freq[item] = 1
 
-        match_made_in_heaven = []
-        for key, value in  freq.items():
-            if value ==4:
-                match_made_in_heaven.append(key)
-        if len(match_made_in_heaven) == 0:
-            return None
-        return match_made_in_heaven
+    match_made_in_heaven = []
+    for key, value in  freq.items():
+        if value ==4:
+            match_made_in_heaven.append(key)
+    if len(match_made_in_heaven) == 0:
+        return None
+    return match_made_in_heaven
 
 
 
