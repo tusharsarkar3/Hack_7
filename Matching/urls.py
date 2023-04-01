@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
     path('questions/', views.questions, name='questions'),
     path('show_matches/', views.show_matches, name='show_matches'),
-    path('swipeCard/<int:pk>',views.swipeCard,name='swipeCard')
+    path('swipeCard/<int:pk>',views.swipeCard,name='swipeCard'),
+    path('chat/',views.chat,name='chat')
 
 ]

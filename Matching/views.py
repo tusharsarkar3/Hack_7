@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import *
 from django.contrib.auth.models import User
-from Matching.models import *
+from .models import *
 from social.urls import *
 from django.contrib.auth.decorators import login_required
+from .match_lago import matching_algorithm, num_similarities_multi, num_similarities_binary
+from .astrology_matching import give_relationship_score
 
 
 def questions(request):
@@ -64,8 +66,19 @@ def questions(request):
 @login_required
 def show_matches(request):
     # matches=User.objects.all()
-    matches = Matches.objects.filter(user=request.user)
-    return render(request, 'Matching/show_matches.html',context={'matches':matches})
+    recommendations = matching_algorithm(request)
+    if recommendations is None:
+        matches = Matches.objects.filter(user=request.user)
+        return render(request, 'Matching/show_matches.html',context={'matches':matches})
+    else:
+        for recommendation in recommendations:
+            match = Matches.objects.create(user= request.user, matched_with= recommendation.user)
+        matches = Matches.objects.filter(user=request.user)
+        give_relationship_score(request, matches)
+        return render(request, 'Matching/show_matches.html', context={'matches': matches})
+
+
+
 
 @login_required
 def swipeCard(request,pk):
@@ -79,3 +92,7 @@ def swipeCard(request,pk):
         return redirect('show_matches')
     else:
         return redirect('show_matches')
+    
+@login_required
+def chat(request):
+     return render(request, 'Matching/chat.html')

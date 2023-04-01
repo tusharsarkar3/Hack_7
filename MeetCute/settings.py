@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap5',
     'Matching.apps.MatchingConfig',
+    'channels',
 
 ]
 
@@ -76,6 +77,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'MeetCute.wsgi.application'
+ASGI_APPLICATION = "MeetCute.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database
