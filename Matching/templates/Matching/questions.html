@@ -54,40 +54,738 @@
 {% block content%}
 <div class="position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
-        <h2 style="margin-top: 2vh !important;text-align: center;">SELF ASSESSMENT</h2>
-        <h4 style="text-align: center;"> It is recommended to answer these questions in the presence of an adult</h4>
-        <h4 style="text-align: center;">Rate the following as per the frequency of occurences</h4>
+        <h2 style="margin-top: 2vh !important;text-align: center;">Matching questions</h2>
+        <h4 style="text-align: center;">Please answer a few questions so that we can help you find the perfect match</h4>
         <form method="POST" action="">
             {% csrf_token %}
+            <!--Kundli-->
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your Date of Birth</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="dobu" placeholder="dd/mm/yyyy" class="form-control">
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your time of Birth</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="timeu" placeholder="hr:min" class="form-control">
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your place of Birth</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="placeu" placeholder="city name" class="form-control">
+                </div>
+            </div>
+            <!--Proximity-->
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Address</h5>
+                </div>
+                <div>
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h6 class="card-title">State:</h6>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="stateu" class="form-control">
+                </div>
+                </div>
+                <div>
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h6 class="card-title">City:</h6>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="cityu" class="form-control">
+                </div>
+                </div>
+            </div>
+
+            <!---Basic questions-->
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your Age</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="number" name="ageu" class="form-control">
+                </div>
+            </div>
+            <div class="card-body" style="padding: 0.5rem !important;">
+                <h5 class="card-title">What you want your partner's age to be?</h5>
+            </div>
+            <div style="margin-bottom:1rem;">
+                <input type="number" name="agep" placeholder="Enter range(eg: 22-25)" class="form-control">
+            </div>
+        </div>
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Gender</h5>
+                    <h5 class="card-title">Your Gender</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="gender" value="0">Male
+                            <input type="radio" name="genderu" value="Male">Male
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="gender" value="1">Female
+                            <input type="radio" name="genderu" value="Female">Female
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="gender" value="2">Others
+                            <input type="radio" name="genderu" value="Others">Others
                         </label>
                     </div>
                 </div>
             </div>
             
             <div class="card text-center">
-                <div class="card-body" style="padding: 0.5rem !important;">
-                    <h5 class="card-title">Age</h5>
-                </div>
-                <div style="margin-bottom:1rem;">
-                    <input type="number" name="age" class="form-control">
+                <div class="card-body">
+                    <h5 class="card-title">What you want your partner's gender to be?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="genderp" value="Male">Male
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="genderp" value="Female">Female
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="genderp" value="Others">Others
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="genderp" value="Any">Any one of the above
+                        </label>
+                    </div>
                 </div>
             </div>
+            
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Religion</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Hindu">Hindu
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Christian">Christian
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Muslim">Muslim
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Jain">Jain
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Parsi">Parsi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionu" value="Sikh">Sikh
+                        </label>
+                    </div>
+
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">What you want your partner's religion to be?</h5>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="religionp" value="Hindu">Hindu
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="religionp" value="Christian">Christian
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="religionp" value="Muslim">Muslim
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="religionp" value="Jain">Jain
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="religionp" value="Parsi">Parsi
+                                </label>
+                            </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionp" value="Sikh">Sikh
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="religionp" value="Any">Any one of the above
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your Mother tongue</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Hindi">Hindi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Marathi">Marathi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Gujarati">Gujarati
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Bengali">Bengali
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Punjabi">Punjabi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Tamil">Tamil
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Telugu">Telugu
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Kannada">Kannada
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Urdu">Urdu
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="English">English
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Parsi">Parsi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mothertongueu" value="Others">Others
+                        </label>
+                    </div>
+            
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">What you want your partner's Mother tongue to be?</h5>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Hindi">Hindi
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Marathi">Marathi
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Gujarati">Gujarati
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Bengali">Bengali
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Punjabi">Punjabi
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Tamil">Tamil
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Telugu">Telugu
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Kannada">Kannada
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Urdu">Urdu
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="English">English
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Parsi">Parsi
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Others">Others
+                                </label>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="mothertonguep" value="Any">Any one of the above
+                                </label>
+                            </div>
+            <!--relationship type-->
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">What type of relationship are you looking for?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="relationshiptypeu" value="Casual">Casual
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="relationshiptypeu" value="Serious">Serious
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="relationshiptypeu" value="Marry">Marry
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="relationshiptypeu" value="DK">Don't know
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Social desire-->
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your educational qualification</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="eduu" value="UG">Under graduate
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="eduu" value="PG">Post graduate
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="eduu" value="Phd">Doctorate
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">What you want your partner's educational qualification to be?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="edup" value="UG">Under graduate
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="edup" value="PG">Post graduate
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="edup" value="Phd">Doctorate
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="edup" value="Any">Any one of the above
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your profession</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="profu" class="form-control">
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">What do you want your partner's profession to be?</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="profp" class="form-control">
+                </div>
+            </div>
+            <!--similarity based on preferences-->
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How would you characterize your ideal date?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref1" value="home">Home : Netflix and chill or Play board games or Cook together etc.
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref1" value="outdoor">Outdoors : cafe or mall or theatre or garden or fancy restaurant or parks etc.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Are you:</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref2" value="cat">a Cat person
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref2" value="dog">a Dog person
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Are you:</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref3" value="day">a day person
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref3" value="night">a night person
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your prefered movie/series genre</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="action">action
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="horror">horror
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="mystery">mystery
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="romance">romance
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="comedy">comedy
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="romcom">romcom
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="drama">drama
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="scifi">sci-fi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="crime">crime
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="fantasy">fantasy
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref4" value="nonfic">non-fiction(documentaries)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your prefered book genre</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="action">action
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="horror">horror
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="mystery">mystery
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="romance">romance
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="comedy">comedy
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="romcom">romcom
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="drama">drama
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="scifi">sci-fi
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="crime">crime
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="fantasy">fantasy
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref5" value="nonfic">non-fiction
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Your prefered music type</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Pop">Pop
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Rock">Rock
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Jazz">Jazz
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Classical">Classical
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Bollywood">Bollywood
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="EDMs">EDMs
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="HipHop">Hip Hop
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="K-Pop">K-Pop
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Metal">Metal
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref6" value="Country">Country
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Are you:</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref7" value="min">a minimalist
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="pref7" value="max">a maximalist
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--mbti-->
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you get your energy from interaction with ...</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiEI" value="E">the world around you
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiEI" value="I">your own activities and thoughts
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Does your info preferably come from ...</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiSN" value="S">observing, measuring, experience
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiSN" value="N">from explanation, reasoning, more abstract understanding
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How do you decide: </h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiTF" value="T">by way of ratio, logic, given decision criteria
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiTF" value="F">by looking at context, interests, what feels right
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How do you approach situations: </h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiJP" value="J">should things go as planned and wanted
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="mbtiJP" value="P">are you flexible, open to change, go with the flow
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+            
+            <!--Interests/hobbies-->
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">What are your interests and hobbies?</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="inthobu" class="form-control">
+                </div>
+            </div>
+            <!--similarity-->
+
+            
             <!-- Submit button -->
             <div class="align-self-center mx-auto text-center">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
