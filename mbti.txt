@@ -1,0 +1,19 @@
+mbtimatches = {
+    "INTJ":["ENTJ"],
+    "INTP":["ESTJ"],
+    "INFJ":["ENTP","INFP","ENFP"],
+    "INFP":["INFJ"],
+    "ISTJ":["ESFP"],
+    "ISTP":["ESTJ"],
+    "ISFJ":["ISFP","ESTP"],
+    "ISFP":["ENFJ","ISFJ","ESFJ"],
+
+    "ENTJ":["INTJ"],
+    "ENTP":["INFJ"],
+    "ENFJ":["ISFP"],
+    "ENFP":["INFJ"],
+    "ESTJ":["INTP","ISTP"],
+    "ESTP":["ISFJ"],
+    "ESFJ":["ISFP"],
+    "ESFP":["ISTJ"],
+}

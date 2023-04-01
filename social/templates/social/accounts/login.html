@@ -1,0 +1,74 @@
+f{%extends "social/accounts/base.html"%}
+{% load static %}
+
+{% block content%}
+
+<div class="wrapper">
+    <div class="header">
+        <div class="top">
+            <div class="logo">
+                <img src="{% static 'social/img/instagram.png' %}" alt="instagram" style="width: 175px;">
+            </div>
+            {% for message in messages %}
+            <div class="alert-danger py-1 mb-1 rounded">
+                <p class="text-danger m-3">{{message}}</p>
+            </div>
+            {% endfor %}
+            <form class="form" action="" method="POST">
+                {% csrf_token %}
+                <div class="input_field">
+                    <input type="text" placeholder="Username" class="input" name="username" id="username">
+                </div>
+                <div class="input_field">
+                    <input type="password" placeholder="Password" class="input" name="password" id="password">
+                </div>
+                <button type="submit" class="btn">Log In</button>
+            </form>
+            <div class="or">
+                <div class="line"></div>
+                <p>OR</p>
+                <div class="line"></div>
+            </div>
+            <div class="dif">
+                <div class="fb">
+                    <div><img src=" {% static 'social/img/facebook.png' %}" alt="facebook"></div>
+                    <div>
+                        <p>Log in with Facebook</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="signup">
+            <p>Don't have an account? <a href="{% url 'register'%}">Sign up</a></p>
+        </div>
+        <div class="apps">
+            <p>Get the app.</p>
+            <div class="icons">
+                <a href="#"><img src="{% static 'social/img/googleplay.png' %}" alt="appstore"></a>
+                <a href="#"><img src="{% static 'social/img/playstore.png' %}" alt="googleplay"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="links">
+            <ul>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">SUPPORT</a></li>
+                <li><a href="#">PRESS</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">JOBS</a></li>
+                <li><a href="#">PRIVACY</a></li>
+                <li><a href="#">TERMS</a></li>
+                <li><a href="#">DIRECTORY</a></li>
+                <li><a href="#">PROFILES</a></li>
+                <li><a href="#">HASHTAGS</a></li>
+                <li><a href="#">LANGUAGE</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            ©2021 INSTAGRAM
+        </div>
+    </div>
+</div>
+
+{%endblock%}

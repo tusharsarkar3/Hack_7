@@ -1,0 +1,235 @@
+{% extends 'social/base.html'%}
+{% load static %}
+{% load bootstrap5 %}
+<link rel="stylesheet" href="{% static 'social/css/style.css' %}">
+
+{% block content %}
+
+<!-- Modal -->
+<form id="newPostForm" action="{%url 'index'%}" method="POST" enctype="multipart/form-data">
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {% bootstrap_form upload_form %}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--  -->
+
+<div class="container-fluid">
+    <div class="container-lg" id="contentWrapper">
+        <div class="row mt-5">
+            <div id="main" class="col-lg-8 col-12 my-4">
+
+                {% include 'social/statuses.html'%}
+
+                <!-- FEED -->
+                {% for post in posts %}
+                <div class="card mt-4 post">
+                    <div class="post-header px-4 py-3">
+                        <div class="post-header-left">
+                            <div class="post-header-profilepic">
+
+                                {%if post.user.profile_pic %}
+                                <img src="{{ post.user.profile_pic.url }}" alt="" class="img-fluid">
+                                {% else %}
+                                <img src="{% static 'social/img/default.png'%}" alt="" class="img-fluid">
+                                {% endif %}
+
+
+                            </div>
+                            <div class="post-header-username mx-2">
+                                <small><strong>{{ post.user.user.username }}</strong></small>
+                            </div>
+                        </div>
+                        <div class="post-header-right">
+                            <h5><a href="#">...</a></h5>
+                        </div>
+                    </div>
+                    <div class="post-content" data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-url="{{ post.image.url }}" data-username="{{ post.user.user.username }}" data-profilepic="{{post.user.profile_pic.url}}" data-caption="{{ post.description }}">
+                        <img src="{{ post.image.url }}" alt="">
+                    </div>
+
+                    <div class="post-footer">
+                        <div class="post-footer-icons d-flex justify-content-between p-2">
+                            <div class="post-footer-icons-left">
+
+                                {% if post in liked_posts%}
+                                <a href="{% url 'like' post_id=post.id%}"><i
+                                        class='bx bxs-heart px-2 ms-0 text-danger'></i></a>
+                                {% else %}
+                                <a href="{% url 'like' post_id=post.id%}"><i class='bx bx-heart px-2 ms-0'></i></a>
+                                {% endif %}
+
+
+
+
+                                <a href="#"><i class='bx bx-message-rounded px-2'></i></a>
+                                <a href="#"><i class='bx bx-paper-plane px-2'></i></a>
+                            </div>
+                            <div class="post-footer-icons-right">
+                                <a href="#"><i class='bx bx-bookmark px-2'></i></a>
+                            </div>
+                        </div>
+                        <div class="post-footer-details px-2 my-0">
+                            <p><strong> {{ post.likes.count }} like{{ post.likes.count | pluralize}}</strong></p>
+                            <p><strong>{{ post.user.user.username }}</strong>
+                                {{ post.description|truncatechars:30 }}<span
+                                    class="text-muted small">{%if post.description|wordcount > 5%}more{%endif%}</span>
+                            </p>
+                            {% if post.comments.all %}
+                            {% if post.comments.count > 3 %}
+                            <p id="viewComments" data-bs-toggle="modal" data-bs-target="#imageModal" data-url="{{ post.image.url }}"
+                                data-username="{{ post.user.user.username }}"
+                                data-profilepic="{{post.user.profile_pic.url}}" data-caption="{{ post.description }}"
+                                class="text-muted">View
+                                    all {{ post.comments.count }}
+                                    comment{{ post.comments.count | pluralize}}</p>
+                            {% endif %}
+                            {% else %}
+                            <p class="text-muted">No comments</p>
+                            {% endif %}
+                            <!-- Comments Loop -->
+                            {% for comment in post.comments.all|slice:"3" %}
+                            <p><strong>{{ comment.user.user.username }}</strong> {{ comment.comment|truncatechars:20 }}
+                            </p>
+                            {% endfor %}
+                            <!----------  -->
+                            <p class="text-muted text-uppercase time">{{ post.created_at | timesince}} ago.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="comment-input d-none d-md-flex align-items-center justify-content-between mx-2 p-2 border-top mb-2">
+                        <div class="emoji"><i class='bx bx-smile'></i></div>
+
+
+                        <div class="comment">
+                            <form action="{% url 'comment' post_id=post.id %}" method="POST">
+                                {% csrf_token %}
+                                <input class="py-2 small" type="text" name="comment" id="comment"
+                                    placeholder="Add a comment..." required>
+                                <button type="submit">Post</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="img-container">
+                                            <img alt="" class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="comments-container card h-100">
+                                            <div class="user-header card-header bg-white d-flex align-content-center border-0">
+                                                <div class="post-header-profilepic">
+                                                    <img alt="" class="img-fluid">
+                                                </div>
+                                                <div class="post-header-username mx-2 d-flex flex-column">
+                                                    <small><strong></strong></small>
+                                                    <small id="caption"></small>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+
+
+                                            </div>
+                                            <div class="card-footer">
+                                                <p class="text-muted">Add comment...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  -->
+            </div>
+
+            <div id="subContent" class="col-4 pt-4">
+                <div class="affix position-fixed ">
+                    <div class="d-flex">
+                        <div class="profile">
+                            <div class="image mx-2">
+                                {%if user.profile.profile_pic %}
+                                <img src="{{ user.profile.profile_pic.url }}" alt="">
+                                {%else%}
+                                <img src="{%static 'social/img/default.png'%}" alt="">
+                                {%endif%}
+                            </div>
+                            <div class="name mx-2">
+                                <a href="#" class="username">{{user.username}}</a>
+                                <a href="#" class="text-dark">{{user.first_name}} {{user.last_name}}</a>
+                            </div>
+                        </div>
+                        <div class="logout">
+                            <a href="{% url 'logout'%}">Logout</a>
+                        </div>
+                    </div>
+                    <div class="suggestions mt-5 px-2">
+
+                        <p>Suggestions For You</p>
+
+                        {%for this_user in all_users %}
+                        <div class="d-flex my-2">
+                            <div class="profile me-3">
+                                <div class="image mx-2">
+                                    {%if this_user.profile.profile_pic %}
+                                    <img src="{{ this_user.profile.profile_pic.url }}" alt="">
+                                    {%else%}
+                                    <img src="{%static 'social/img/default.png'%}" alt="">
+                                    {%endif%}
+                                </div>
+                                <div class="name mx-2">
+                                    <a href="#" class="username">{{this_user.username}}</a>
+                                    <a href="#" class="text-dark">Instagram recommended</a>
+                                </div>
+                            </div>
+                            <div class="logout ms-4">
+                                {% if this_user in followed %}
+                                <a href="{% url 'follow' user_id=this_user.id %}" class="text-danger text-muted">Unfollow</a>
+                                {% else %}
+                                <a href="{% url 'follow' user_id=this_user.id %}">Follow</a>
+                                {%endif%}
+
+                            </div>
+                        </div>
+                        {%endfor%}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
