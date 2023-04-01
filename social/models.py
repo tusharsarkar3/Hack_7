@@ -10,7 +10,7 @@ class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile', null=True)
     name=models.CharField(max_length=50)
     bio=models.TextField(max_length=500,blank=True)
-    profile_pic=CloudinaryField('images')
+    profile_pic= CloudinaryField('images')
 
     def __str__(self):
         return f'{self.user.username} Profile'
