@@ -6,6 +6,7 @@ from .models import *
 from social.urls import *
 from django.contrib.auth.decorators import login_required
 from .match_lago import matching_algorithm, num_similarities_multi, num_similarities_binary
+from .astrology_matching import give_relationship_score
 
 
 def questions(request):
@@ -73,6 +74,7 @@ def show_matches(request):
         for recommendation in recommendations:
             match = Matches.objects.create(user= request.user, matched_with= recommendation.user)
         matches = Matches.objects.filter(user=request.user)
+        give_relationship_score(request, matches)
         return render(request, 'Matching/show_matches.html', context={'matches': matches})
 
 

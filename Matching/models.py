@@ -40,6 +40,8 @@ class Matches(models.Model):
     matched_with = models.ForeignKey(User,related_name='matched_with_%(class)s_related',on_delete=models.CASCADE)
     swiped_right = models.BooleanField(null=True, default=None)
     swiped_left = models.BooleanField(null=True, default=None)
+    match_score_western = models.FloatField(null=True, default=None)
+
 
 class Global_stats(models.Model):
     binary_question_similarity_mean = models.FloatField()
