@@ -1,12 +1,17 @@
-'use strict';
+// 'use strict';
 
 var tinderContainer = document.querySelector('.tinder');
 var allCards = document.querySelectorAll('.tinder--card');
 var nope = document.getElementById('nope');
 var love = document.getElementById('love');
 
-function initCards(card, index) {
-    console.log('hello');
+function initializecard(){
+    console.log("hello")
+}
+
+
+// function initCards(card, index) {
+//     console.log("hello");
 //   var newCards = document.querySelectorAll('.tinder--card:not(.removed)');
 
 //   newCards.forEach(function (card, index) {
@@ -16,7 +21,7 @@ function initCards(card, index) {
 //   });
   
 //   tinderContainer.classList.add('loaded');
-}
+// }
 
 // initCards();
 
