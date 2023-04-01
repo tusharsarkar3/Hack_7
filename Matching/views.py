@@ -90,3 +90,7 @@ def swipeCard(request,pk):
         return redirect('show_matches')
     else:
         return redirect('show_matches')
+    
+@login_required
+def chat(request):
+     return render(request, 'Matching/chat.html')

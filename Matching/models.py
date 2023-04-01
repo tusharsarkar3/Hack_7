@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+from django.utils import timezone
 
 class Questions(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -51,3 +52,9 @@ class Global_stats(models.Model):
     books_number_of_similarity_std = models.FloatField()
     music_number_of_similarity_mean = models.FloatField()
     music_number_of_similarity_std = models.FloatField()
+
+class Message(models.Model):
+    from_user = models.ForeignKey(User,on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User,related_name='to_user_%(class)s_related',on_delete=models.CASCADE)
+    time_messaged = models.DateTimeField(default=timezone.now)
+    content = models.TextField()

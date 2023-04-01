@@ -1,5 +1,6 @@
 {% load bootstrap5 %}
 {% load static %}
+{% load bootstrap5 %}
 <!DOCTYPE html>
 <html>
 
@@ -24,6 +25,7 @@
 </head>
 
 <body>
+    {% include 'social/navbar.html' %}
 
     {% block content %} {% endblock content %}
 
