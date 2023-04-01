@@ -14,33 +14,18 @@
   </div>
 
   <div class="tinder--cards">
+    {% for card in matches %}
+    {% if card.swiped_left is None and card.swiped_right is None %}
+    <div class="tinder--card" id="{{card.id}}">
+      <img src="https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{card.user.profile.profile_pic}}" /> 
+      <h3>{{card.user.profile.name}}</h3>
+      <!-- <p>This is a demo for Tinder like swipe cards</p> -->
+    </div>
+    {% endif %}
+    {% empty %}
+    <p>Empty</p>
+    {% endfor %}
 
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/people" />
-      <h3>Demo card 1</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/animals" />
-      <h3>Demo card 2</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/nature" />
-      <h3>Demo card 3</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/tech" />
-      <h3>Demo card 4</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/arch" />
-      <h3>Demo card 5</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
   </div>
 
   <div class="tinder--buttons">
@@ -97,11 +82,36 @@
     
       hammertime.on('panend', function (event) {
         el.classList.remove('moving');
-        tinderContainer.classList.remove('tinder_love');
-        tinderContainer.classList.remove('tinder_nope');
-    
+        
         var moveOutWidth = document.body.clientWidth;
         var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
+
+        var swipe;
+
+        if (tinderContainer.classList.contains('tinder_love')){
+          swipe = 'right'
+        } else {
+          swipe = 'left'
+        }
+        
+        try {
+          if (!keep){
+            $.ajax({
+              type:'POST',
+              url:'{% url "swipeCard" pk=12 %}'.replace(/12/, el.id.toString()),
+              data:{
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                  action: '',
+                  swipe
+              }
+          });
+          }
+        } catch (err) {
+          console.log(err)
+        }
+
+        tinderContainer.classList.remove('tinder_love');
+        tinderContainer.classList.remove('tinder_nope');
     
         event.target.classList.toggle('removed', !keep);
     
@@ -132,11 +142,27 @@
         var card = cards[0];
     
         card.classList.add('removed');
-    
+        
+        var swipe;
         if (love) {
           card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+          swipe = 'right';
         } else {
           card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+          swipe = 'left';
+        }
+        try {
+            $.ajax({
+              type:'POST',
+              url:'{% url "swipeCard" pk=12 %}'.replace(/12/, el.id.toString()),
+              data:{
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                  action: '',
+                  swipe
+              }
+          });
+        } catch (err) {
+          console.log(err)
         }
     
         initCards();
