@@ -127,3 +127,7 @@ def follow(request, user_id):
         new_follow.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def profile(request):
+    return render(request, 'social/profile.html')
