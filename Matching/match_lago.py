@@ -13,10 +13,8 @@ def num_similarities_binary(user_answers, matches):
         counter +=1
 
 def num_similarities_multi(user_answers, matches):
-    #movie
-    user_answers.movie
-    #books
-    #music
+    return len(set(user_answers.strip().split(",")) & set(matches.strip().split(",")))
+
 
 
 def matching_algorithm(request):
@@ -35,7 +33,20 @@ def matching_algorithm(request):
         if number_of_similarities_binary_fields >= Global_stats.binary_question_similarity_mean:
             print("Consider them")
             final_matches.append(matches)
-        number_of_similarities_binary_fields = num_similarities_multi(user_answers.movie, matches.movie)
+        number_of_similarities_movies = num_similarities_multi(user_answers.movie, matches.movie)
+        if number_of_similarities_movies >= Global_stats.binary_question_similarity_mean:
+            print("Consider them")
+            final_matches.append(matches)
+
+        number_of_similarities_books = num_similarities_multi(user_answers.books, matches.books)
+        if number_of_similarities_books >= Global_stats.binary_question_similarity_mean:
+            print("Consider them")
+            final_matches.append(matches)
+
+        number_of_similarities_music = num_similarities_multi(user_answers.music, matches.music)
+        if number_of_similarities_movies >= Global_stats.binary_question_similarity_mean:
+            print("Consider them")
+            final_matches.append(matches)
 
 
 
