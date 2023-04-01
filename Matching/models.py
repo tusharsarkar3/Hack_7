@@ -29,15 +29,9 @@ class Questions(models.Model):
     movie=models.CharField(max_length=20)
     music=models.CharField(max_length=20)
     minmax=models.CharField(max_length=20)
-    EI=models.CharField(max_length=20)
-    SN=models.CharField(max_length=20)
-    TF=models.CharField(max_length=20)
-    JP=models.CharField(max_length=20)
+
+    MBTI=models.CharField(max_length=20)
     interests=models.CharField(max_length=200)
-
-
-
-
 
 
 class Matches(models.Model):
@@ -45,3 +39,15 @@ class Matches(models.Model):
     matched_with = models.ForeignKey(User,related_name='matched_with_%(class)s_related',on_delete=models.CASCADE)
     swiped_right = models.BooleanField(null=True, default=None)
     swiped_left = models.BooleanField(null=True, default=None)
+
+class Global_stats(models.Model):
+    binary_question_similarity_mean = models.FloatField()
+    binary_question_dissimilarity_mean = models.FloatField()
+    binary_question_similarity_std = models.FloatField()
+    binary_question_dissimilarity_std = models.FloatField()
+    movies_number_of_similarity_mean = models.FloatField()
+    movies_number_of_similarity_std = models.FloatField()
+    books_number_of_similarity_mean = models.FloatField()
+    books_number_of_similarity_std = models.FloatField()
+    music_number_of_similarity_mean = models.FloatField()
+    music_number_of_similarity_std = models.FloatField()
