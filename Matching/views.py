@@ -106,3 +106,7 @@ def swipeCard(request,pk):
 @login_required
 def chat(request):
      return render(request, 'Matching/chat.html')
+
+@login_required
+def resolution(request):
+     return render(request, 'Matching/resolution.html')

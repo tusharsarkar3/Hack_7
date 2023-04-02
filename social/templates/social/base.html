@@ -10,7 +10,8 @@
     <link rel="icon" href="{% static 'social/meetcute.ico' %}">
     <link rel="shortcut icon" href="{% static 'social/meetcute.ico' %}" type="image/x-icon">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://kit.fontawesome.com/94ff7b6360.js" crossorigin="anonymous"></script>
     {% if title %}
         <title>{{title}} | MeetCute</title>
     {% else %}
@@ -19,7 +20,7 @@
 
     {% block styles %}
     {% bootstrap_css %}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"> -->
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="{% static 'social/css/style.css' %}">
     {% endblock %}
