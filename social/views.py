@@ -143,8 +143,8 @@ def profile(request):
     else:
         upload_form = UploadImageForm()
     
-
-    context = {'upload_form': upload_form}
+    profile=Questions.objects.filter(user=request.user)
+    context = {'upload_form': upload_form,'profile':profile}
 
     return render(request, 'social/profile.html', context)
     # return render(request, 'social/profile.html')

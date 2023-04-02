@@ -34,8 +34,10 @@ def questions(request):
             animal = request.POST.get('pref2')
             daynight = request.POST.get('pref3')
             movie = request.POST.get('pref4')
-            music = request.POST.get('pref5')
-            minmax = request.POST.get('pref6')
+            book = request.POST.get('pref5')
+
+            music = request.POST.get('pref6')
+            minmax = request.POST.get('pref7')
             MBTI = request.POST.get('mbtiEI') + request.POST.get('mbtiSN') + request.POST.get('mbtiTF') + request.POST.get('mbtiJP')
             interests = request.POST.get('inthobu')
             print(MBTI)
@@ -47,7 +49,7 @@ def questions(request):
                                                 partner_mothertongue=partner_mothertongue,relationshiptype=relationshiptype,
                                                 edu=edu,partner_edu=partner_edu,profession=profession,
                                                 partner_profession=partner_profession,
-                                                datechar=datechar,animal=animal,daynight=daynight,movie=movie,
+                                                datechar=datechar,animal=animal,daynight=daynight,movie=movie,book=book,
                                                 music=music,minmax=minmax,MBTI=MBTI,interests=interests)
             print(questions)
             return redirect('show_matches')
