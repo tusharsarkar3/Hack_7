@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 class Questions(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -31,7 +32,6 @@ class Questions(models.Model):
     music=models.CharField(max_length=20, null=True)
     book=models.CharField(max_length=20, null=True)
     minmax=models.CharField(max_length=20, null=True)
-
     MBTI=models.CharField(max_length=20, null=True)
     interests=models.CharField(max_length=200, null=True)
 
