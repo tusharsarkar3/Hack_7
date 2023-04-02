@@ -130,4 +130,21 @@ def follow(request, user_id):
 
 @login_required
 def profile(request):
-    return render(request, 'social/profile.html')
+    
+    if request.method == 'POST':
+        upload_form = UploadImageForm(request.POST, request.FILES)
+
+        if upload_form.is_valid():
+            # upload_form.instance.user = request.user.profile
+            upload_form.save()
+
+            return redirect('index')
+
+    else:
+        upload_form = UploadImageForm()
+    
+
+    context = {'upload_form': upload_form}
+
+    return render(request, 'social/profile.html', context)
+    # return render(request, 'social/profile.html')
