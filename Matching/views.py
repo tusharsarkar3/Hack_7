@@ -7,6 +7,7 @@ from social.urls import *
 from django.contrib.auth.decorators import login_required
 from .match_lago import matching_algorithm, num_similarities_multi, num_similarities_binary
 # from .astrology_matching import give_relationship_score
+from social.models import *
 
 
 def questions(request):
@@ -40,6 +41,10 @@ def questions(request):
             minmax = request.POST.get('pref7')
             MBTI = request.POST.get('mbtiEI') + request.POST.get('mbtiSN') + request.POST.get('mbtiTF') + request.POST.get('mbtiJP')
             interests = request.POST.get('inthobu')
+            if 'image' in request.FILES:
+                profile_photo = request.FILES['image']
+            else:
+                profile_photo = None
             print(MBTI)
             questions = Questions.objects.create(user=request.user,dob =dob,tob=tob,pob=pob,state=state,
                                                  city=city,age=age,partner_age_low=partner_age_low,
@@ -51,7 +56,10 @@ def questions(request):
                                                 partner_profession=partner_profession,
                                                 datechar=datechar,animal=animal,daynight=daynight,movie=movie,book=book,
                                                 music=music,minmax=minmax,MBTI=MBTI,interests=interests)
-            print(questions)
+            p=Profile.objects.get(user=request.user)
+            p.profile_pic=profile_photo
+            p.save()
+            print(p.profile_pic)
             return redirect('show_matches')
     '''form = QuestionsForm
     if request.method == 'POST':
