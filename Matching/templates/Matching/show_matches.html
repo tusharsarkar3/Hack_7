@@ -19,7 +19,7 @@
     {% for card in matches %}
     {% if card.swiped_left is None and card.swiped_right is None %}
     <div class="tinder--card" id="{{card.id}}">
-      <img src="https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{card.user.profile.profile_pic}}" /> 
+      <img src="https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{card.matched_with.profile.profile_pic}}" />
       <h3>{{card.user.profile.name}}</h3>
       <!-- <p>This is a demo for Tinder like swipe cards</p> -->
     </div>
