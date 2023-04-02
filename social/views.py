@@ -37,9 +37,10 @@ def index(request):
                 for inter_post in inter_posts:
                     posts.append(inter_post)
     except:
-        posts = Post.objects.all()
+        pass
 
-
+    posts = Post.objects.all()
+    print(posts)
     all_users = User.objects.exclude(id=request.user.id)
     liked_posts = [i for i in Post.objects.all() if Like.objects.filter(user=request.user, post=i)]
     followed = [i for i in User.objects.all() if Follow.objects.filter(follower=request.user, followed=i)]
