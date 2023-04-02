@@ -29,6 +29,7 @@ class Questions(models.Model):
     daynight=models.CharField(max_length=20, null=True)
     movie=models.CharField(max_length=20, null=True)
     music=models.CharField(max_length=20, null=True)
+    book=models.CharField(max_length=20, null=True)
     minmax=models.CharField(max_length=20, null=True)
 
     MBTI=models.CharField(max_length=20, null=True)

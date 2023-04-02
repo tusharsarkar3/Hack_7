@@ -1,0 +1,104 @@
+{%extends "Matching/base.html"%} {% load static %} 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'Matching/css/chat.css' %}" />
+{% endblock styles %} 
+
+
+{% block content %}
+
+<br>
+<div class="mt-5">
+<center><h1>Hello , Welcome to conflict resolution ! {{request.user}}</h1></center>
+    <br>
+    <div style="flex-direction: row;" class="row mx-5">
+    <div
+      class="chat__item__container col-6 justify-content-center mx-auto"
+      id="id_chat_item_container"
+      style="font-size: 20px"
+    >
+      <br />
+      <input type="text" id="id_message_send_input" />
+      <button type="submit" id="id_message_send_button">Send Message</button>
+      <br />
+      <br />
+    </div>
+    <div class="card shadow-sm p-3 mb-5 bg-body rounded col-6">
+        <div class="card-body">
+            <ul class="list">
+                <li>Make a list of all the points you want to include.</li>
+                <li>Be clear of what bothers you.</li>
+                <li>Use I statements.</li>
+                <li>Express how you feel and what you need along with the issues.</li>
+                <li>Validate their feelings also and empathize with them.</li>
+                <li>Avoid personal attacks or blaming your partner.</li>
+                <li>Express appreciation also.</li>
+                <li>Don't generalize their behavior or personality.</li>
+                <li>Avoid jumping to conclusions and assumptions. Ask them instead.</li>
+                <li>
+
+                    Focus on the issue.
+                </li>
+                <li>
+
+                    Take responsibility for your actions.
+                </li>
+                <li>
+
+                    When your partner explains, listen, think then take action.
+                </li>
+                <li>
+
+                    Don't go to bed without clearing out your issues.
+                </li>
+                <li>
+
+                    Remember that you are here cultivate your relationship, communication is the key.
+                </li>
+                <li>
+
+                    Note: If you have had the same arguments again and again then it is best to involve an expert.
+                </li>
+            </ul>
+            
+            
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %} 
+
+{% block scripts %}
+<script>
+  
+    const chatSocket = new WebSocket('ws://'+ window.location.host+'/');
+
+      chatSocket.onopen = function (e) {
+        console.log("The connection was setup successfully!");
+      };
+      chatSocket.onclose = function (e) {
+        console.log("Something unexpected happened !");
+      };
+      document.querySelector("#id_message_send_input").focus();
+      document.querySelector("#id_message_send_input").onkeyup = function (e) {
+        if (e.keyCode == 13) {
+          document.querySelector("#id_message_send_button").click();
+        }
+      };
+      document.querySelector("#id_message_send_button").onclick = function (e) {
+        var messageInput = document.querySelector(
+          "#id_message_send_input"
+        ).value;
+        chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
+      };
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        var div = document.createElement("div");
+        div.innerHTML = data.username + " : " + data.message;
+        document.querySelector("#id_message_send_input").value = "";
+        document.querySelector("#id_chat_item_container").appendChild(div);
+      };
+    </script>
+   
+
+{% endblock scripts %}
