@@ -11,12 +11,35 @@ import json
 from django.contrib.auth.models import User
 from Matching.urls import *
 from django.contrib import messages
-from Matching.models import *
+from django.db.models import Q
+from Matching.models import Questions, Matches
 
 
 @login_required(login_url='login')
 def index(request):
-    posts = Post.objects.all()
+    try:
+        user_questions = Questions.objects.get(user = request.user)
+        all_hashtags = []
+        if user_questions.movie is not None:
+            movie = user_questions.movie.strip().split(",")
+            all_hashtags.extend(movie)
+        if user_questions.music is not None:
+            music = user_questions.music.strip().split(",")
+            all_hashtags.extend(music)
+        if user_questions.book is not None:
+            book  = user_questions.book.strip().split(",")
+            all_hashtags.extend(book)
+        # Q(description__contains=5000) | Q(income__isnull=True)
+        posts = []
+        for hashtag in all_hashtags:
+            inter_posts = Post.objects.filter(description__contains=hashtag)
+            if len(inter_posts) != 0:
+                for inter_post in inter_posts:
+                    posts.append(inter_post)
+    except:
+        posts = Post.objects.all()
+
+
     all_users = User.objects.exclude(id=request.user.id)
     liked_posts = [i for i in Post.objects.all() if Like.objects.filter(user=request.user, post=i)]
     followed = [i for i in User.objects.all() if Follow.objects.filter(follower=request.user, followed=i)]
