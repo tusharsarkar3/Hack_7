@@ -79,12 +79,13 @@ def show_matches(request):
     recommendations = matching_algorithm(request)
     if recommendations is None:
         matches = Matches.objects.filter(user=request.user)
+        print("MATCHES",matches)
         return render(request, 'Matching/show_matches.html',context={'matches':matches})
     else:
         for recommendation in recommendations:
             match = Matches.objects.create(user= request.user, matched_with= recommendation.user)
         matches = Matches.objects.filter(user=request.user)
-        give_relationship_score(request, matches)
+        # give_relationship_score(request, matches)
         return render(request, 'Matching/show_matches.html', context={'matches': matches})
 
 
