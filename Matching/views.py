@@ -6,7 +6,7 @@ from .models import *
 from social.urls import *
 from django.contrib.auth.decorators import login_required
 from .match_lago import matching_algorithm, num_similarities_multi, num_similarities_binary
-from .astrology_matching import give_relationship_score
+# from .astrology_matching import give_relationship_score
 
 
 def questions(request):
